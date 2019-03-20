@@ -17,6 +17,7 @@ class Departments extends React.Component {
         const { departments, } = this.state;
 
         if (departments.length <= 0)
+        
         return <h2>No departments</h2>
         return departments.map( department => (
             <Card>

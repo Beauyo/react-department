@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Items from "./Items"
 import { Button, Header, Segment, } from 'semantic-ui-react';
 
 
@@ -15,9 +16,9 @@ class DepartmentView extends React.Component {
 
     deleteDepartment = (id) => {
         axios.delete(`/api/departments/${id}`)
-        .then( res => { debugger
-            const { department, } = this.state;
-            this.setState({ department: department.filter( t => t.id !== id), })
+        .then( res => { 
+            const { departments, } = this.state;
+            this.setState({ departments: departments.filter( t => t.id !== id), })
         })
     }
 
@@ -40,6 +41,9 @@ class DepartmentView extends React.Component {
                 >
                 Back
                 </Button>
+                <br />
+                <br />
+                <Items departmentId={this.props.match.params.id} />
             </div>
         )
     }
