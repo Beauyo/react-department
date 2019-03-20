@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 import { Card, Header, Button } from "semantic-ui-react";
 import { Link, } from "react-router-dom"
@@ -36,6 +36,7 @@ class Departments extends React.Component {
                 <Header as="h1">Departments</Header>
                 <br />
                 <Button as={Link} to="/" color="blue">Home</Button>
+                <br />
                 <br />
                 <Button as={Link} color="blue" to="/departments/new">Add Department</Button>
                 <br />

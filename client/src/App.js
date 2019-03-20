@@ -3,13 +3,14 @@ import { Route, Switch, } from "react-router-dom";
 import Home from './components/Home';
 import NoMatch from "./components/NoMatch";
 import Departments from './components/Departments';
+import Navbar from "./components/Navbar";
 import DepartmentsForm from './components/DepartmentsForm'
 import DepartmentView from './components/DepartmentView';
 import { Container, } from "semantic-ui-react";
 
 const App = () => (
   <Fragment>
-   
+   <Navbar />
     <Container>
       <Switch>
         <Route exact path="/" component={Home} />
