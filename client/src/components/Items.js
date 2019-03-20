@@ -1,7 +1,7 @@
 
 import React from "react";
 import axios from 'axios'
-import { Card, Header, } from "semantic-ui-react";
+import { Card, Header, Button, } from "semantic-ui-react";
 
 class Items extends React.Component {
   state = { items: [] }
@@ -11,6 +11,14 @@ class Items extends React.Component {
         axios.get(`/api/departments/${departmentId}/items`)
             .then( res => {
                 this.setState({ items: res.data })
+            })
+    }
+
+    deleteItems = (id) => {
+        axios.delete(`/api/departments/${id}/items/${id}`)
+            .then( res => {
+                const { items, } = this.state
+                this.setState({ items: items.filter( t => t.id !== id)})
             })
     }
 
@@ -27,6 +35,7 @@ class Items extends React.Component {
           <Card.Description>
             { product.description }
           </Card.Description>
+          <Button color="red" onClick = {() => this.deleteItems(items.id)}>Delete</Button>
         </Card.Content>
       </Card>
     ))

@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 2019_03_20_050504) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "item_id"
-    t.index ["item_id"], name: "index_departments_on_item_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -29,7 +27,9 @@ ActiveRecord::Schema.define(version: 2019_03_20_050504) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_items_on_department_id"
   end
 
-  add_foreign_key "departments", "items"
+  add_foreign_key "items", "departments"
 end

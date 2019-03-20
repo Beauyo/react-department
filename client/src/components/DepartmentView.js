@@ -14,17 +14,10 @@ class DepartmentView extends React.Component {
         })
     }
 
-    deleteDepartment = (id) => {
-        axios.delete(`/api/departments/${id}`)
-        .then( res => { 
-            const { departments, } = this.state;
-            this.setState({ departments: departments.filter( t => t.id !== id), })
-        })
-    }
+
 
     render() {
         const { name, } = this.state.department;
-
         return (
             <div>
                 <Segment>
@@ -32,9 +25,7 @@ class DepartmentView extends React.Component {
                 </Segment>
                 <br />
                 <br />
-                <Button color="red" onClick={this.deleteDepartment}>Delete</Button>
-                <br />
-                <br />
+   
                 <Button
                 color="black"
                 onClick={this.props.history.goBack}

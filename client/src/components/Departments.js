@@ -6,10 +6,32 @@ import { Link, } from "react-router-dom"
 class Departments extends React.Component {
     state = { departments: [] };
 
+    editDepartment = (id) => { 
+        axios.put(`/api/departments/${id}`)
+        .then( res => {
+            const departments = this.state.departments.map( t => {
+                if (t.id === id)
+                return res.date;
+                return t;
+            })
+            this.setState({ departments })
+        })
+
+    }
+
     componentDidMount() {
         axios.get("/api/departments")
         .then( res => { 
             this.setState({ departments: res.data, });
+        })
+    }
+
+
+    deleteDepartment = (id) => { 
+        axios.delete(`/api/departments/${id}`)
+        .then( res => { 
+            const { departments, } = this.state;
+            this.setState({ departments: departments.filter( t => t.id !== id), }) 
         })
     }
 
@@ -25,7 +47,9 @@ class Departments extends React.Component {
                     <Card.Header>{ department.name }</Card.Header>
                 </Card.Content>
                 <Card.Content extra>
+                    <Button color="blue" onClick={this.editDepartment}>Edit</Button>
                     <Button as={Link} to={`/departments/${department.id}`} color='blue'>View</Button>
+                    <Button color="red" onClick = {() => this.deleteDepartment(department.id)}>Delete</Button>
                 </Card.Content>
             </Card>
         ))
