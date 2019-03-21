@@ -28,15 +28,15 @@ class Items extends React.Component {
 
     if (items.length <= 0)
       return <h2>No items</h2>
-    return items.map( product => (
+    return items.map( item => (
       <Card>
         <Card.Content>
-          <Card.Header>{ product.name }</Card.Header>
-          <Card.Meta>{ product.department }</Card.Meta>
+          <Card.Header>{ item.name }</Card.Header>
+          <Card.Meta>{ item.department }</Card.Meta>
           <Card.Description>
-            { product.description }
+            { item.description }
           </Card.Description>
-          <Button color="red" onClick = {() => this.deleteItems(items.id)}>Delete</Button>
+          <Button color="red" onClick = {() => this.deleteItems(item.id)}>Delete</Button>
         </Card.Content>
       </Card>
     ))
