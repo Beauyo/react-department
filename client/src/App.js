@@ -25,7 +25,7 @@ const App = () => (
 )
 
 const AppContainer = styled.div `
-  background: linear-gradient(to bottom right, aliceblue, black);
+  background: linear-gradient( aliceblue, black);
 `
 
 
