@@ -23,17 +23,13 @@ class DepartmentView extends React.Component {
                 <Segment>
                     <Header as="h1">{ name }</Header>
                 </Segment>
-                <br />
-                <br />
-   
                 <Button
                 color="black"
                 onClick={this.props.history.goBack}
                 >
                 Back
                 </Button>
-                <br />
-                <br />
+
                 <Items departmentId={this.props.match.params.id} />
             </div>
         )

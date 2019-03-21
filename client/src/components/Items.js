@@ -1,3 +1,4 @@
+import styled from "styled-components"
 
 import React from "react";
 import axios from 'axios'
@@ -7,7 +8,7 @@ class Items extends React.Component {
   state = { items: [] }
 
     componentDidMount() {
-        const { departmentId } = this.props
+        const { departmentId, } = this.props
         axios.get(`/api/departments/${departmentId}/items`)
             .then( res => {
                 this.setState({ items: res.data })
@@ -15,7 +16,7 @@ class Items extends React.Component {
     }
 
     deleteItems = (id) => {
-        axios.delete(`/api/departments/${id}/items/${id}`)
+        axios.delete(`/api/departments/${this.props.departmentId}/items/${id}`)
             .then( res => {
                 const { items, } = this.state
                 this.setState({ items: items.filter( t => t.id !== id)})
@@ -44,7 +45,7 @@ class Items extends React.Component {
   render() {
     return (
       <div>
-        <Header as="h1">items</Header>
+        <Header fSize="large" as={HeaderText}>items</Header>
         <br />
         <Card.Group>
           { this.renderItems() }
@@ -53,5 +54,24 @@ class Items extends React.Component {
     )
   }
 }
+
+const fontSize = (size) => {
+    switch (size) {
+      case "large":
+      return "40px";
+      case "small":
+      return "25px";
+      default:
+      return "20px";
+    }
+  }
+  
+ export const HeaderText = styled.h1`
+    color: white !important;
+    text-align: center;
+    font-size: ${ props => fontSize(props.fSize)  } !important;
+  `
+
+
 
 export default Items;

@@ -2,12 +2,16 @@ import React from "react";
 import axios from "axios";
 import { Card, Header, Button } from "semantic-ui-react";
 import { Link, } from "react-router-dom"
+import styled from "styled-components"
+import DepartmentsForm from './DepartmentsForm'
+
 
 class Departments extends React.Component {
     state = { departments: [] };
 
+    toggleEdit = () => this.setState({ editing: !this.state.editing })
     editDepartment = (id) => { 
-        axios.put(`/api/departments/${id}`)
+        axios.put(`/api/departments/${id}`, this.state.departments.name)
         .then( res => {
             const departments = this.state.departments.map( t => {
                 if (t.id === id)
@@ -43,14 +47,20 @@ class Departments extends React.Component {
         return <h2>No departments</h2>
         return departments.map( department => (
             <Card>
-                <Card.Content>
-                    <Card.Header>{ department.name }</Card.Header>
+                   <Card.Content>
+                    {
+                        this.state.editing ?
+                            <DepartmentsForm name={department.name} id={department.id} editDepartment={this.editDepartment} />
+                            :
+                            <Card.Header as={Link} to={`/departments/${department.id}`} >{department.name}</Card.Header>
+                    }
                 </Card.Content>
                 <Card.Content extra>
-                    <Button color="blue" onClick={this.editDepartment}>Edit</Button>
+                    <Button onClick={this.toggleEdit}>Edit</Button>
                     <Button as={Link} to={`/departments/${department.id}`} color='blue'>View</Button>
                     <Button color="red" onClick = {() => this.deleteDepartment(department.id)}>Delete</Button>
                 </Card.Content>
+            
             </Card>
         ))
     }
@@ -58,7 +68,7 @@ class Departments extends React.Component {
     render() {
         return (
             <div>
-                <Header as="h1">Departments</Header>
+                <Header fSize="large" as={HeaderText}>Departments</Header>
                 <br />
                 <Button as={Link} to="/" color="blue">Home</Button>
                 <br />
@@ -72,5 +82,24 @@ class Departments extends React.Component {
         )
     }
 }
+
+const fontSize = (size) => {
+    switch (size) {
+      case "large":
+      return "40px";
+      case "small":
+      return "25px";
+      default:
+      return "20px";
+    }
+  }
+  
+ export const HeaderText = styled.h1`
+    color: white !important;
+    text-align: center;
+    font-size: ${ props => fontSize(props.fSize)  } !important;
+  `
+
+ 
 
 export default Departments;
