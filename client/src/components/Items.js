@@ -5,7 +5,7 @@ import axios from 'axios'
 import { Card, Header, Button, Icon } from "semantic-ui-react";
 
 class Items extends React.Component {
-  state = { items: {} }
+  state = { items: [] }
 
     componentDidMount() {
         const  { departmentId, } = this.props
