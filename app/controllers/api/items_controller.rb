@@ -14,6 +14,7 @@ class Api::ItemsController < ApplicationController
     item = Item.new(item_params)
     if item.save
       render json: item
+      
     else
       render json: item.errors, status: 422
     end
@@ -23,6 +24,7 @@ class Api::ItemsController < ApplicationController
   def update
     if @item.update(item_params)
       render json: @item
+      
     else
       render json: @item.errors, status: 422
     end

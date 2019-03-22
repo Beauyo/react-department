@@ -1,15 +1,16 @@
 import styled from "styled-components"
+import { Link, } from 'react-router-dom'
 
 import React from "react";
 import axios from 'axios'
-import { Card, Header, Button, } from "semantic-ui-react";
+import { Card, Header, Button, Icon } from "semantic-ui-react";
 
 class Items extends React.Component {
   state = { items: [] }
 
     componentDidMount() {
-        const { departmentId, } = this.props
-        axios.get(`/api/departments/${departmentId}/items`)
+        const  { departmentId, } = this.props
+        axios.get(`/api/departments/${departmentId}/items/`)
             .then( res => {
                 this.setState({ items: res.data })
             })
@@ -25,7 +26,7 @@ class Items extends React.Component {
 
   renderItems = () => {
     const { items, } = this.state;
-
+    const  { id, departments_id }  = this.props
     if (items.length <= 0)
       return <h2>No items</h2>
     return items.map( item => (
@@ -37,6 +38,12 @@ class Items extends React.Component {
             { item.description }
           </Card.Description>
           <Button color="red" onClick = {() => this.deleteItems(item.id)}>Delete</Button>
+          <Link to={`/departments/${departments_id}/items/${id}/edit`}>
+            <Button inverted color='blue'>
+                <Icon name='pencil' />
+                Update Item
+            </Button>
+          </Link>
         </Card.Content>
       </Card>
     ))
