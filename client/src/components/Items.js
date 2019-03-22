@@ -1,12 +1,11 @@
 import styled from "styled-components"
 import { Link, } from 'react-router-dom'
-
 import React from "react";
 import axios from 'axios'
 import { Card, Header, Button, Icon } from "semantic-ui-react";
 
 class Items extends React.Component {
-  state = { items: [] }
+  state = { items: {} }
 
     componentDidMount() {
         const  { departmentId, } = this.props

@@ -26,15 +26,15 @@ class ItemForm extends React.Component {
 
   handleSubmit = (e) => { 
     e.preventDefault()
-    const items = { ...this.state }
+    const item = { ...this.state }
     const { id, department_id }  = this.props
     if (id && department_id) {
-      axios.put(`/api/departments/${department_id}/items/${id}`, items)
+      axios.put(`/api/departments/${department_id}/items/${id}`, item)
         .then(res => {
           this.props.history.push(`/departments/${department_id}/items/${id}`)
         })
     } else {
-      axios.post(`/api/departments/${department_id}/items`, items)
+      axios.post(`/api/departments/${department_id}/items`, item)
         .then(res => {
           this.props.history.push(`/departments/${department_id}`)
         })

@@ -11,7 +11,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
+    item = @department.items.new(item_params)
     if item.save
       render json: item
       
